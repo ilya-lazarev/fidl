@@ -10,20 +10,37 @@ ApplicationWindow {
     title: qsTr("Hello World")
 
 
+    Action {
+        id: quitAction
+        text: qsTr("&Quit")
+        shortcut: "Ctrl+Q"
+        tooltip: qsTr("Quits application")
+        iconName: "application-quit"
+        onTriggered: {
+            Qt.quit()
+        }
+    }
+    Action {
+        id: editCopyAction
+        text: qsTr("&Copy")
+        shortcut: "Ctrl+C"
+        tooltip: qsTr("Copy to clipboard")
+        iconName: "edit-copy"
+        onTriggered: {
+        }
+    }
+
     menuBar: MenuBar {
         Menu {
             title :qsTr("File")
             MenuItem {
-                id: quitCommand
-                text: qsTr("Quit")
-                shortcut: "Ctrl+Q"
+                action: quitAction
             }
         }
         Menu {
             title :qsTr("Edit")
             MenuItem {
-                text: qsTr("Copy")
-                shortcut: "Ctrl+C"
+                action: editCopyAction
             }
         }
     }
@@ -32,11 +49,10 @@ ApplicationWindow {
         RowLayout {
             anchors.fill: parent
             ToolButton {
-                id: tbExit
-                text: qsTr("Exit")
-                onClicked: {
-                //    quitCommand.
-                }
+                action: quitAction
+            }
+            ToolButton {
+                action: editCopyAction
             }
         }
     }
